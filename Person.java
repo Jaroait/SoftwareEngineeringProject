@@ -12,13 +12,13 @@ class Person {
 	//static Image feathers = null;
 	int leftCounter, rightCounter;
 	int x, y, width, height;
-	boolean collision, leftDirection;
+	boolean collision, leftDirection, jump;
 	double gravity;
-	int gravityCounter;
+	int gravityCounter, jumpCounter;
 	
 	
 	Person()throws IOException{
-		x = 0;
+		x = 100;
 		y = 700;
 		width = 44;
 		height = 64;
@@ -29,10 +29,20 @@ class Person {
 	public void update() {
 		leftCounter -= 1;
 		rightCounter -= 1;
-		if (collision == false){
-			gravity += 1.6;
+		if (gravity >= 15){
+			gravity = 3.6;
+		}
+		if (collision == false && gravity <= 15){
+			gravity += 3.6;
 			gravityCounter -= 1;
 			y += gravity;
+			jump = false;
+		}
+		else if(jumpCounter <= 2 && gravity <= 15 && jump == true){
+			gravity += 77;
+			gravityCounter -= 1;
+			y+= gravity;
+			jumpCounter++;
 		}
 		else{
 			gravity = 0;
@@ -73,11 +83,14 @@ class Person {
 		leftDirection = false;
 	}
 	public void jump(){
+		jumpCounter = 0;
+		jump = true;
 		if (collision){
-			gravity = 0;
-			gravity -= 75;
-			y += gravity;
-			gravityCounter = 8;
+			if (jumpCounter == 0)
+				gravity = 0;
+				gravity -= 100;
+				//y += gravity;
+				gravityCounter = 8;
 		}
 		else{
 			//do nothing -- fall
