@@ -18,7 +18,7 @@ class Person {
 	
 	
 	Person()throws IOException{
-		x = 0;
+		x = 100;
 		y = 700;
 		width = 44;
 		height = 64;
@@ -29,8 +29,8 @@ class Person {
 	public void update() {
 		leftCounter -= 1;
 		rightCounter -= 1;
-		if (collision == false){
-			gravity += 1.6;
+		if (collision == false && gravity <= 15){
+			gravity += 3.6;
 			gravityCounter -= 1;
 			y += gravity;
 		}
@@ -75,7 +75,7 @@ class Person {
 	public void jump(){
 		if (collision){
 			gravity = 0;
-			gravity -= 75;
+			gravity -= 110;
 			y += gravity;
 			gravityCounter = 8;
 		}
