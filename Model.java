@@ -18,7 +18,7 @@ class Model
 	public void update() {
 		this.person.update();
 		if(collision()){
-			
+			person.gravity = 0;
 		}
 		else{
 			
@@ -33,6 +33,13 @@ class Model
 	public void Jump(){
 		this.person.jump();
 	}
+	public void stopLeftArrow(){
+		this.person.stopWalkLeft();
+	}
+	public void stopRightArrow(){
+		this.person.stopWalkRight();
+	}
+	
 	boolean collision(){
 		if(person.x+person.width > demoMap.base.x && person.x < demoMap.base.x + demoMap.base.width && person.y + person.height+5> demoMap.base.y){
 			person.collision = true;
